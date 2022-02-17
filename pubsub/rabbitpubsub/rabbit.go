@@ -436,6 +436,9 @@ func isRetryable(err error) bool {
 	if !ok {
 		return false
 	}
+	if aerr == amqp.ErrClosed {
+		return true
+	}
 	// amqp.Error has a Recover field which sounds like it should mean "retryable".
 	// But it actually means "can be recovered by retrying later or with different
 	// parameters," which is not what we want. The error codes for which Recover is
