@@ -735,4 +735,6 @@ func (*subscription) ErrorAs(err error, i interface{}) bool {
 }
 
 // Close implements driver.Subscription.Close.
-func (*subscription) Close() error { return nil }
+func (s *subscription) Close() error {
+	return s.conn.Close()
+}
